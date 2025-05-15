@@ -107,66 +107,123 @@ public:
 };
 
 int main() {
-    BankAccount account;
-    SavingsAccount savingsAccount;
-    CurrentAccount currentAccount;
-    FixedDipositAccount fixedDepositAccount;
     int accountType = 0;
 
     cout << "==============================================================" << endl;
     cout << "\t\tWelcome to Banking System" << endl;
     cout << "==============================================================" << endl;
-    cout << "Select Account Type to Create:" << endl;
-    cout << "1. Savings Account" << endl;
-    cout << "2. Current Account" << endl;
-    cout << "3. Fixed Deposit Account" << endl;
-    cout << "Enter your choice: ";
-    cin >> accountType;
-
-    account.setacc();
-
-    int choice;
-    do {
-        cout << "----- Menu -----" << endl;
-        cout << "1. Deposit" << endl;
-        cout << "2. Withdraw" << endl;
-        cout << "3. Display Account Info" << endl;
-        cout << "4. Check Balance" << endl;
-        cout << "5. Exit" << endl;
+    do{
+        cout << "Select Account Type:" << endl;
+        cout << "1. Savings Account" << endl;
+        cout << "2. Current Account" << endl;
+        cout << "3. Fixed Deposit Account" << endl;
+        cout << "4. Exit" << endl;
         cout << "Enter your choice: ";
-        cin >> choice;
-        switch (choice) {
-            case 1:
-                account.deposit();
-                if(accountType == 1) {
-                    savingsAccount.calculateInterest();
-                } 
-                else if(accountType == 3) {
-                    fixedDepositAccount.CalInterest();
+        cin >> accountType;
+        switch(accountType) {
+            case 1: {
+                SavingsAccount sa;
+                int choice;
+                sa.setacc();
+                cout<<"----- What do you want to do? -----"<<endl;
+                cout<<"1. Deposit"<<endl;
+                cout<<"2. Withdraw"<<endl;
+                cout<<"3. Calculate Interest"<<endl;
+                cout<<"4. Get Balance"<<endl;
+                cout<<"5. Display Account Info"<<endl;
+                cout<<"6. Exit"<<endl;
+                cout<<"Enter your choice: ";
+                cin >> choice;
+                if(choice == 1) {
+                    sa.deposit();
+                } else if(choice == 2) {
+                    sa.withdraw();
+                } else if(choice == 3) {
+                    sa.calculateInterest();
+                } else if(choice == 4) {
+                    cout << "Current Balance: " << sa.getBalance() << endl;
+                } else if(choice == 5) {
+                    sa.displayAccountInfo(1);
+                } else if(choice == 6) {
+                    cout << "Exiting the program." << endl;
+                } else {
+                    cout << "Invalid choice. Please try again." << endl;
                 }
-                cout << "----- Done! -----" << endl;
+                cout<<"----- End of Savings Account -----"<<endl;
                 break;
-            case 2:
-                if(accountType==2){
-                    int limit;
-                    cout << "Enter Overdraft Limit: ";
+            }
+            case 2: {
+                CurrentAccount ca;
+                ca.setacc();
+                int choice1;
+                cout<<"----- What do you want to do? -----"<<endl;
+                cout<<"1. Deposit"<<endl;
+                cout<<"2. Withdraw"<<endl;
+                cout<<"3. Set Overdraft Limit"<<endl;
+                cout<<"4. Get Balance"<<endl;
+                cout<<"5. Display Account Info"<<endl;
+                cout<<"6. Exit"<<endl;
+                cout<<"Enter your choice: ";
+                cin >> choice1;
+                if(choice1 == 1) {
+                    ca.deposit();
+                } else if(choice1 == 2) {
+                    ca.withdraw();
+                } else if(choice1 == 3) {
+                    double limit;
+                    cout << "Enter overdraft limit: ";
                     cin >> limit;
-                    currentAccount.setOverdraftLimit(limit);
+                    ca.setOverdraftLimit(limit);
+                } else if(choice1 == 4) {
+                    cout << "Current Balance: " << ca.getBalance() << endl;
+                } else if(choice1 == 5) {
+                    ca.displayAccountInfo(2);
+                } else if(choice1 == 6) {
+                    cout << "Exiting the program." << endl;
+                } else {
+                    cout << "Invalid choice. Please try again." << endl;
                 }
-                account.withdraw();
-                cout << "----- Done! -----" << endl;
+                cout<<"----- End of Current Account -----"<<endl;
                 break;
-            case 3:
-                account.displayAccountInfo(accountType);
-                cout << "----- Done! -----" << endl;
+            }
+            case 3: {
+                FixedDipositAccount fda;
+                fda.setacc();
+                int choice2;
+                cout<<"----- What do you want to do? -----"<<endl;
+                cout<<"1. Deposit"<<endl;
+                cout<<"2. Withdraw"<<endl;
+                cout<<"3. Calculate Interest"<<endl;
+                cout<<"4. Get Balance"<<endl;
+                cout<<"5. Display Account Info"<<endl;
+                cout<<"6. Exit"<<endl;
+                cout<<"Enter your choice: ";
+                cin >> choice2;
+                if(choice2 == 1) {
+                    fda.deposit();
+                } else if(choice2 == 2) {
+                    fda.withdraw();
+                } else if(choice2 == 3) {
+                    fda.CalInterest();
+                } else if(choice2 == 4) {
+                    cout << "Current Balance: " << fda.getBalance() << endl;
+                } else if(choice2 == 5) {
+                    fda.displayAccountInfo(3);
+                } else if(choice2 == 6) {
+                    cout << "Exiting the program." << endl;
+                } else {
+                    cout << "Invalid choice. Please try again." << endl;
+                }
                 break;
+            }
             case 4:
-                int bal=account.getBalance();
-                cout << "Your Balance is: " << bal << endl;
-                cout << "----- Done! -----" << endl;
+                cout << "Exiting the program." << endl;
                 break;
+            default:
+                cout << "Invalid choice. Please try again." << endl;
         }
-    } while (choice != 5);
+    }while(accountType!=4);
+    
 
     cout << "==============================================================" << endl;
     cout << "\tThank you for using our Banking System!" << endl;
